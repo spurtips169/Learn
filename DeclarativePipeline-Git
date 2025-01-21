@@ -1,9 +1,17 @@
 pipeline {
     agent any
+    environment{
+        PATH = "/usr/share/maven/bin:$PATH"
+    }
     stages {
         stage('Git Checkout') {
             steps {
                git branch: 'main', url: 'https://github.com/spurtips169/Learn.git'
+            }
+        }
+        stage("Maven Build"){
+            steps{
+                sh "mvn clean pakage"
             }
         }
     }
